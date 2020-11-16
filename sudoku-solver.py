@@ -250,12 +250,12 @@ pygame.init() # Initialize pygame (gui)
 pygame.font.init()
 myfont = pygame.font.SysFont('Arial', 30)
 
-WINDOW_SIZE = [900, 900]
+WINDOW_SIZE = [900, 475]
 screen = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("Sudoku solver")
 
 done = False
- 
+
 # -------- Main Loop until the user clicks the close button----------- #
 while not done:
     for event in pygame.event.get():
@@ -301,5 +301,5 @@ while not done:
  
     # Updates the screen
     pygame.display.flip()
- 
+
 pygame.quit()
