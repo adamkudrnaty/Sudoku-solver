@@ -21,12 +21,12 @@ def init(array):
 
     #CHECK IF THE X LINE MEETS THE RULES
     def is_in_my_line(x, y, number):
-        for sloupce in range(9):
-            if(sloupce != y):
-                if (xy_to_number(x, sloupce) == number): return True
-        for radky in range(9):
-            if(radky != x):
-                if (xy_to_number(radky, y) == number): return True
+        for columns in range(9):
+            if(columns != y):
+                if (xy_to_number(x, columns) == number): return True
+        for rows in range(9):
+            if(rows != x):
+                if (xy_to_number(rows, y) == number): return True
         return False
 
     #CHECK IF THE SQUARE MEETS THE RULES
@@ -77,13 +77,13 @@ def init(array):
 
     def check_lines(array):
         numbers_in_line = []
-        pocet_cisel_v_rade = 9
+        count_numbers_in_line = 9
         for line in range(81):
-            if array[line] != 0 and len(numbers_in_line) != pocet_cisel_v_rade: numbers_in_line.append(array[line])
-            elif array[line] == 0 and len(numbers_in_line) != pocet_cisel_v_rade: pocet_cisel_v_rade = pocet_cisel_v_rade - 1
-            if len(numbers_in_line) == pocet_cisel_v_rade:
+            if array[line] != 0 and len(numbers_in_line) != count_numbers_in_line: numbers_in_line.append(array[line])
+            elif array[line] == 0 and len(numbers_in_line) != count_numbers_in_line: count_numbers_in_line = count_numbers_in_line - 1
+            if len(numbers_in_line) == count_numbers_in_line:
                 if check_duplicates(numbers_in_line) == True: return False
-                pocet_cisel_v_rade = 9
+                count_numbers_in_line = 9
                 numbers_in_line = []
         return True
 
@@ -127,11 +127,11 @@ def init(array):
                 for c in range(10):
                     if(xy_to_number(a, b) == 0):
                         if(is_in_my_line(a,b,c) == True):
-                            pozice = xy_to_location(a, b)
-                            options[pozice] = odstran(c, options[pozice])
+                            position = xy_to_location(a, b)
+                            options[position] = odstran(c, options[position])
                         elif(my_square(a,b,c) == True):
-                            pozice = xy_to_location(a, b)
-                            options[pozice] = odstran(c, options[pozice])
+                            position = xy_to_location(a, b)
+                            options[position] = odstran(c, options[position])
         return options
 
     def vykresleni_do_sudoku_array(options, sudoku_array):
@@ -192,12 +192,12 @@ def init(array):
                     my_options[my_position] = 0
                     backtracking_sudoku_array[location_backtracking_options[my_position]] = backtracking_options[my_position][my_options[my_position]]
                     my_position -= 1
-                    vynulovano = False
-                    while(vynulovano == False):
+                    is_done = False
+                    while(is_done == False):
                         if my_options[my_position] < len(backtracking_options[my_position]) - 1:
                             my_options[my_position] += 1
                             backtracking_sudoku_array[location_backtracking_options[my_position]] = backtracking_options[my_position][my_options[my_position]]
-                            vynulovano = True
+                            is_done = True
                         else:
                             my_options[my_position] = 0
                             backtracking_sudoku_array[location_backtracking_options[my_position]] = backtracking_options[my_position][my_options[my_position]]
@@ -282,7 +282,6 @@ while not done:
                 number[row][column] = myfont.render("", False, (255, 255, 255))
                 screen.blit(number[row][column],(column*50 + 20 + MARGIN*column,row*50 + 10 + MARGIN*row))
             else: grid[row][column] += 1
-            print("Click ", pos, "Grid coordinates: ", row, column)
  
     # Set the screen background
     screen.fill(WHITE)
